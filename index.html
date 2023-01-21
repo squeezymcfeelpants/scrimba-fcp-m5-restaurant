@@ -22,21 +22,29 @@
 			</div>
 		</header>
 
-		<section class="menu-header">
-			<h2>MENU</h2>
-			<img class="round-icon menu-icon" src="./img/menu.png" alt="ice cream shop menu icon">
+		<section class="menu-section">
+			<div class="menu-header">
+				<h2>MENU</h2>
+				<img class="round-icon menu-icon" src="./img/menu.png" alt="ice cream shop menu icon">
+			</div>
+			<div class="menu-items" id="menu-items">
+			</div>
 		</section>
 
-		<section class="menu-items" id="menu-items">
-			<article class="menu-item">
-				<img class="round-icon item-icon" src="./img/chocolate-bar.png" alt="chocolate bar">
-				<div class="item-details">
-					<h3>Chocolate Bar</h3>
-					<p>Vanilla ice cream</p>
+		<section class="order-section hidden" id="order-section">
+			<div class="order-header">
+				<img class="round-icon ticket-icon" src="./img/clerk-m.png" alt="ice cream shop worker icon">
+				<h2>Your Order</h2>
+			</div>
+			<div class="order-items" id="order-items">
+			</div>
+			<div class="order-footer">
+				<div class="order-total-group">
+					<p>Order Total</p>
+					<p id="order-total"></p>
 				</div>
-				<div class="item-price">$4</div>
-				<button class="fa-solid fa-plus"></button>
-			</article>
+				<button class="lg-r-btn" id="send-order-btn">Send Order</button>
+			</div>
 		</section>
 
 		<footer>

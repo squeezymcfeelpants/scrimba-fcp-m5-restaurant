@@ -74,9 +74,9 @@ const menuArray = [
 	{
 		name: 'Milkshake',
 		desc: 'milkshake, malt optional',
-		options: [ 'choice of ice cream', 'malt available', 'topped with whipped cream' ],
+		options: [ 'choice of ice cream', 'when you "gotta know what a five-dollar shake tastes like"', 'with straw (no cooties)' ],
 		id: '844a3d54-4f4e-4603-8a3a-62ca374dc2ef',
-		price: 7,
+		price: 5,
 		image: 'milkshake.png',
 	},
 	{
