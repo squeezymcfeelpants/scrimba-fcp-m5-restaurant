@@ -8,6 +8,7 @@ initOrder(customerOrder);
 
 //
 initMiscButtonListeners();
+initNumberInputListeners();
 
 //
 buildAndDisplayMenu(menuArray);
@@ -94,7 +95,6 @@ function updateOrderDisplay(order) {
 	const validItems = order.items.filter((o) => (o.count > 0));
 
 	if (validItems.length) {
-		let gtotal = 0;
 		let html = '';
 
 		validItems.forEach((data) => {
@@ -107,21 +107,34 @@ function updateOrderDisplay(order) {
 	<p class="order-item-desc">${desc}</p>
 	<p class="order-item-total">$${total.toLocaleString()}</p>
 </div>`;
-
-			gtotal += total;
 		});
 
 		// itemized order list
 		document.getElementById('order-items').innerHTML = html;
 
 		// order total
-		document.getElementById('order-total').textContent = `$${gtotal.toLocaleString()}`;
+		document.getElementById('order-total').textContent = `$${getOrderTotalCost(order).toLocaleString()}`;
 
 		ordersEl.classList.remove('hidden');
 	}
 	else {
 		ordersEl.classList.add('hidden');
 	}
+}
+
+//
+function getOrderTotalCost(order) {
+	let total = 0;
+
+	if (order) {
+		const validItems = order.items.filter((o) => (o.count > 0));
+
+		validItems.forEach((data) => {
+			total += (data.count * data.item.price);
+		});
+	}
+
+	return total;
 }
 
 //
@@ -149,9 +162,52 @@ function removeItemFromOrder(itemId, order) {
 function initMiscButtonListeners() {
 	document.getElementById('send-order-btn').addEventListener('click', (ev) => {
 		console.log('send-order-btn');
+		const total = getOrderTotalCost(customerOrder);
+		if (total) {
+			document.getElementById('total-amount-due').textContent = `$${total}`;
+			showModal('payment-modal');
+		}
+	});
+
+	document.getElementById('pay-btn').addEventListener('click', (ev) => {
+		const formEl = document.getElementById('payment-form');
+		console.log(formEl.reportValidity());
+		const fd = new FormData(document.getElementById('payment-form'));
+		console.log(fd);
 	});
 }
 
+//
+function initNumberInputListeners() {
+	document.querySelectorAll('input[type="number"]').forEach((el) => {
+		el.addEventListener('keypress', (ev) => {
+			const key = ev.keyCode;
+			if ((key < 48) || (key > 57)) {
+				ev.preventDefault();
+			}
+		});
+	});
+}
+
+//
+function showModal(id, reset = true) {
+	const modalEl = document.getElementById(id);
+
+	if (modalEl) {
+		if (reset) {
+			modalEl.querySelectorAll('input').forEach((el) => {
+				el.value = '';
+			});
+		}
+	
+		document.querySelectorAll('.modal').forEach((el) => {
+			el.classList.add('hidden');
+		});
+
+		modalEl.classList.remove('hidden');
+		document.getElementById('modal-container').classList.remove('hidden');
+	}
+}
 
 
 

@@ -52,6 +52,29 @@
 		</footer>
 	</div>
 
+	<div class="modal-container hidden" id="modal-container">
+		<div class="modal-frame">
+
+			<div class="payment-modal modal hidden" id="payment-modal">
+				<div class="payment-header">
+					<img class="round-icon payment-icon" src="./img/clerk-f.png" alt="ice cream shop worker icon">
+					<h2>Checkout</h2>
+				</div>
+				<p class="payment-total">Total Amount Due: <span id="total-amount-due"></span></p>
+				<form class="payment-form" id="payment-form" action="#">
+					<input type="text" name="name" placeholder="Enter Your Name" required>
+					<input type="number" name="ccnum" placeholder="Enter Card Number" required>
+					<input type="number" name="cccvv" placeholder="Enter CVV" required>
+				</form>
+				<button class="lg-r-btn pay-btn" id="pay-btn">Pay</button>
+			</div>
+			
+			<div class="receipt-modal modal hidden" id="receipt-modal">
+				<h2>receipt</h2>
+			</div>
+		</div>
+	</div>
+
 	<script src="script.js" type="module"></script>
 </body>
 </html>
