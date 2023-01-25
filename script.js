@@ -30,7 +30,7 @@ function initOrder(order) {
 function generateTodaysMenu(menuData, count) {
 	const working = [...menuData];
 	for (let i = 0; i < 6; ++i) {
-		working.sort((a, b) => (Math.random() < 0.5));
+		working.sort((a, b) => (0.5 - Math.random()));
 	}
 
 	return working.slice(0, count).sort((a, b) => (a.price - b.price));
