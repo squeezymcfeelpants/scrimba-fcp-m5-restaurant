@@ -1,6 +1,4 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 import { menuArray } from './data.js'
-
 
 //
 const customerOrder = {};
@@ -21,6 +19,7 @@ initOrderItemsListener();
 //
 function initOrder(order) {
 	order.items = [];
+	order.formData = null;
 }
 
 //
@@ -160,21 +159,17 @@ function removeItemFromOrder(itemId, order) {
 
 //
 function initMiscButtonListeners() {
-	document.getElementById('send-order-btn').addEventListener('click', (ev) => {
-		console.log('send-order-btn');
-		const total = getOrderTotalCost(customerOrder);
-		if (total) {
-			document.getElementById('total-amount-due').textContent = `$${total}`;
-			showModal('payment-modal');
-		}
-	});
+	// send order button
+	document.getElementById('send-order-btn').addEventListener('click', onSubmitOrder);
 
-	document.getElementById('pay-btn').addEventListener('click', (ev) => {
-		const formEl = document.getElementById('payment-form');
-		console.log(formEl.reportValidity());
-		const fd = new FormData(document.getElementById('payment-form'));
-		console.log(fd);
-	});
+	// payment modal close button
+	document.getElementById('payment-modal-close').addEventListener('click', onClosePaymentModal);
+
+	// payment modal pay button
+	document.getElementById('pay-btn').addEventListener('click', onPayButton);
+
+	// receipt modal close button
+	document.getElementById('receipt-modal-close').addEventListener('click', closeReceiptModal);
 }
 
 //
@@ -209,5 +204,86 @@ function showModal(id, reset = true) {
 	}
 }
 
+//
+function hideModal(id) {
+	const modalEl = document.getElementById(id);
+
+	if (modalEl) {
+		modalEl.classList.add('hidden');
+
+		// assume only one modal active at any time
+		document.getElementById('modal-container').classList.add('hidden');
+	}
+}
+
+//
+function onSubmitOrder(ev) {
+	const total = getOrderTotalCost(customerOrder);
+	if (total) {
+		document.getElementById('total-amount-due').textContent = `$${total}`;
+		showModal('payment-modal');
+	}
+}
+
+//
+function onClosePaymentModal(ev) {
+	hideModal('payment-modal');
+}
+
+//
+function onPayButton(ev) {
+	const formEl = document.getElementById('payment-form');
+
+	formEl.querySelectorAll('input').forEach((el) => {
+		el.value = el.value.trim();
+	});
+
+	if (formEl.reportValidity()) {
+		customerOrder.formData = new FormData(document.getElementById('payment-form'));
+
+		//
+		hideModal('payment-modal');
+
+		//
+		document.getElementById('receipt-modal-close').setAttribute('disabled', true);
+		showModal('receipt-modal');
+
+		//
+		processPayment();
+	}
+}
+
+//
+function closeReceiptModal(ev) {
+	hideModal('receipt-modal');
+
+	// reset
+	initOrder(customerOrder);
+	updateOrderDisplay(customerOrder);
+}
+
+//
+function processPayment() {
+	const msgEl = document.getElementById('receipt-message');
+	const trailers = ['^-----', '-^----', '--^---', '---^--', '----^-', '-----^'];
+	let count = 0;
+
+	function showProcessingMsg() {
+		msgEl.textContent = `${trailers[(count % trailers.length)]} Processing ${trailers[(count % trailers.length)]}`;
+		++count;
+	}
+
+	showProcessingMsg();
+	const interval = setInterval(showProcessingMsg, 350);
+
+	setTimeout(() => {
+		clearInterval(interval);
+
+		const name = customerOrder.formData?.get('name') || 'patron';
+		msgEl.textContent = `Thank you, ${name}. You order is on the way!`;
+
+		document.getElementById('receipt-modal-close').removeAttribute('disabled');
+	}, 6000);
+}
 
 

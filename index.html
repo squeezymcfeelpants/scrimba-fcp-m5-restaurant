@@ -14,17 +14,17 @@
 </head>
 <body>
 	<div class="container">
-		<header class="store-header">
+		<header class="section-header store-header">
 			<img class="round-icon store-icon" src="./img/ice-cream-shoppe.png" alt="ice cream shop icon">
-			<div>
-				<h2>Someone's Ice Cream Shoppe</h2>
-				<p>The best slogan ever here</p>
+			<div class="store-name-info">
+				<h2>Kali's Ice Cream Shop</h2>
+				<p>This is the best slogan ever!</p>
 			</div>
 		</header>
 
 		<section class="menu-section">
-			<div class="menu-header">
-				<h2>MENU</h2>
+			<div class="section-header menu-header">
+				<h2 class="lg-ctr">Menu</h2>
 				<img class="round-icon menu-icon" src="./img/menu.png" alt="ice cream shop menu icon">
 			</div>
 			<div class="menu-items" id="menu-items">
@@ -32,9 +32,9 @@
 		</section>
 
 		<section class="order-section hidden" id="order-section">
-			<div class="order-header">
+			<div class="section-header order-header">
 				<img class="round-icon ticket-icon" src="./img/clerk-m.png" alt="ice cream shop worker icon">
-				<h2>Your Order</h2>
+				<h2 class="lg-ctr">Your Order</h2>
 			</div>
 			<div class="order-items" id="order-items">
 			</div>
@@ -48,7 +48,7 @@
 		</section>
 
 		<footer>
-			<p>&copy;2023 chill code, llc</p>
+			<p>&copy;2023 chill af code, llc</p>
 		</footer>
 	</div>
 
@@ -56,9 +56,10 @@
 		<div class="modal-frame">
 
 			<div class="payment-modal modal hidden" id="payment-modal">
-				<div class="payment-header">
+				<button class="sm-c-btn close-btn fa-solid fa-xmark" id="payment-modal-close"></button>
+				<div class="section-header payment-header">
 					<img class="round-icon payment-icon" src="./img/clerk-f.png" alt="ice cream shop worker icon">
-					<h2>Checkout</h2>
+					<h2 class="lg-ctr">Checkout</h2>
 				</div>
 				<p class="payment-total">Total Amount Due: <span id="total-amount-due"></span></p>
 				<form class="payment-form" id="payment-form" action="#">
@@ -70,7 +71,12 @@
 			</div>
 			
 			<div class="receipt-modal modal hidden" id="receipt-modal">
-				<h2>receipt</h2>
+				<button class="sm-c-btn close-btn fa-solid fa-xmark" id="receipt-modal-close"></button>
+				<div class="section-header receipt-header">
+					<img class="round-icon receipt-icon" src="./img/receipt.png" alt="ice cream shop receipt icon">
+					<h2 class="lg-ctr">Receipt</h2>
+				</div>
+				<p class="receipt-message" id="receipt-message"></p>
 			</div>
 		</div>
 	</div>

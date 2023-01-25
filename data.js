@@ -20,7 +20,7 @@ const menuArray = [
 		desc: 'triple scopp ice cream cone',
 		options: [ 'choice of ice cream', 'three voluminous scoops', 'with sugar wafer cone' ],
 		id: '8df9f9ca-f128-4cb6-a92c-e897e1fe6bba',
-		price: 6,
+		price: 7,
 		image: 'cone-triple.png',
 	},
 	{
@@ -44,7 +44,7 @@ const menuArray = [
 		desc: 'ice cream sundae, with three scoops',
 		options: [ 'choice of ice cream', 'three scoops', 'sprinkles', 'nuts', 'cherries', 'whipped cream', 'kitchen sink, too' ],
 		id: 'd3bd56e6-1556-4301-83a3-ca04d579d32b',
-		price: 10,
+		price: 8,
 		image: 'sundae-3-scoop.png',
 	},
 	{
@@ -52,7 +52,7 @@ const menuArray = [
 		desc: 'cup of sherbet',
 		options: [ 'choice of 6 fruity flavors', 'a lighter option to ice cream' ],
 		id: '038b597b-2754-4c29-b93b-444178880a7d',
-		price: 5,
+		price: 4,
 		image: 'sherbet.png',
 	},
 	{
