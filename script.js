@@ -1,5 +1,7 @@
 import { menuArray } from './data.js'
 
+const DAILY_MENU_ITEM_COUNT = 4;
+
 //
 const customerOrder = {};
 initOrder(customerOrder);
@@ -9,7 +11,9 @@ initMiscButtonListeners();
 initNumberInputListeners();
 
 //
-buildAndDisplayMenu(menuArray);
+const todaysMenu = generateTodaysMenu(menuArray, DAILY_MENU_ITEM_COUNT);
+buildAndDisplayMenu(todaysMenu);
+
 initItemButtonListeners();
 updateOrderDisplay(customerOrder);
 initOrderItemsListener();
@@ -20,6 +24,16 @@ initOrderItemsListener();
 function initOrder(order) {
 	order.items = [];
 	order.formData = null;
+}
+
+//
+function generateTodaysMenu(menuData, count) {
+	const working = [...menuData];
+	for (let i = 0; i < 6; ++i) {
+		working.sort((a, b) => (Math.random() < 0.5));
+	}
+
+	return working.slice(0, count).sort((a, b) => (a.price - b.price));
 }
 
 //
